@@ -1,16 +1,18 @@
-assert(typeof zipFile == "string", "zipFile variable is either undefined or ill-defined");
-
-assert(zipFile.match(/^https?:\/\/.+\.zip$/) != null, "Bad format for the URL provided as zipFile ("+zipFile+")");
-
-
-// Compatibility for Safari and others
-var AudioContext = window.AudioContext || window.webkitAudioContext;
-// This object will contain the list of audio files to preload
-var audioRepository = {};
-//On crée une instance de zip
-var zip = new JSZip();
-
 $(document).ready(function() {
+
+    assert(typeof zipFile == "string", "zipFile variable is either undefined or ill-defined");
+
+    assert(zipFile.match(/^https?:\/\/.+\.zip$/) != null, "Bad format for the URL provided as zipFile ("+zipFile+")");
+
+
+    // Compatibility for Safari and others
+    var AudioContext = window.AudioContext || window.webkitAudioContext;
+    // This object will contain the list of audio files to preload
+    var audioRepository = {};
+    //On crée une instance de zip
+    var zip = new JSZip();
+
+  
     //On utilise le JSZipUtils pour récupérer le fichier zip en ajax
     JSZipUtils.getBinaryContent(zipFile, function(error, data) {
         if(error) {
