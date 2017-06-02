@@ -66,8 +66,8 @@ $(document).ready(function() {
                             }
                             else audio.append($(this).clone());
                           });
-                          if (replaced)
-                            $(t).replaceWith(audio);
+                          //if (replaced)
+                            //$(t).replaceWith(audio);
                         });
       }, 7);
     }) ();
