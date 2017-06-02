@@ -53,9 +53,9 @@ $(document).ready(function() {
                       blob = new Blob([content], {'type': 'image/gif'});
                     else return;
                     var src = URL.createObjectURL(blob);
-                    resourcesRepository[path] = src;
-                    
+                    resourcesRepository[path] = src;    
                 });
+                console.log(resourcesRepository);
             });
         });
     });
@@ -86,6 +86,7 @@ $(document).ready(function() {
                             $(t).replaceWith(audio.attr(getAttributes($(t))));
                           }
                         });
+
                         $("img").each(function() {
                           var src = $(this).attr("src");
                           if (typeof resourcesRepository[src] != "undefined")
