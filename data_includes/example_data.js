@@ -62,7 +62,14 @@ var items = [
     //     transfer: "keypress"
     // } ],
 
+    ["intro", "Message", {
+        html: "This is just a placeholder.",
+        transfer: "click"
+    }], 
 
+    ["intro", "Preloader", {
+    }], 
+    
     ["intro", "Form", {
         html: { include: "example_intro.html" },
         validators: {
