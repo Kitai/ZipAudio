@@ -64,10 +64,10 @@ $(document).ready(function() {
                               audio.append(source);
                               replaced = true;
                             }
-                            else audio.append($(this).clone());
+                            else audio.append($("<source>").attr(getAttributes($(this))));
                           });
-                          //if (replaced)
-                            //$(t).replaceWith(audio);
+                          if (replaced)
+                            $(t).replaceWith(audio);
                         });
       }, 7);
     }) ();
