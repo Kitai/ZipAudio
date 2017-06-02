@@ -57,7 +57,7 @@ $(document).ready(function() {
                           var replaced = false;
                           $(t).find("source").each(function(){
                             var src = $(this).attr("src");
-                            if (typeof audioRepository[src] != "undefined"){
+                            /*if (typeof audioRepository[src] != "undefined"){
                               console.log("Replacing "+src+" with "+audioRepository[src]);
                               var source = $("<source>");
                               source.attr({type: $(this).attr("type"), src: audioRepository[src]});
@@ -65,9 +65,11 @@ $(document).ready(function() {
                               replaced = true;
                             }
                             else audio.append($("<source>").attr(getAttributes($(this))));
+                            */
+                            console.log(src);
                           });
-                          if (replaced)
-                            $(t).replaceWith(audio);
+                          //if (replaced)
+                          //  $(t).replaceWith(audio);
                         });
       }, 7);
     }) ();
