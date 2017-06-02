@@ -55,6 +55,12 @@ var items = [
     // NOTE: You could also use the 'Message' controller for the experiment intro (this provides a simple
     // consent checkbox).
 
+    ["intro", "Message", {
+        html: { include: "audiorendering.html" },
+        transfer: "keypress"
+    } ],
+
+
     ["intro", "Form", {
         html: { include: "example_intro.html" },
         validators: {
