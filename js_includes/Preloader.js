@@ -1,6 +1,14 @@
 $(document).ready(function() {
 
-    console.log("Executed once");
+    function getAttributes ( $node ) {
+      var attrs = {};
+      $.each( $node[0].attributes, function ( index, attribute ) {
+          attrs[attribute.name] = attribute.value;
+          if (attrs[attribute.name] == "") attrs[attribute.name] = true;
+      } );
+
+      return attrs;
+    }
 
     assert(typeof zipFile == "string", "zipFile variable is either undefined or ill-defined");
 
@@ -43,19 +51,23 @@ $(document).ready(function() {
       var ivl = setInterval(function() { 
                         // Replacing all audios with a blob URL
                         $("audio").each(function() {
-                          var replaced = false;
                           var t = this;
+                          var audio = $("<audio>");
+                          audio.attr(getAttributes($(t)));
+                          var replaced = false;
                           $(t).find("source").each(function(){
                             var src = $(this).attr("src");
                             if (typeof audioRepository[src] != "undefined"){
                               console.log("Replacing "+src+" with "+audioRepository[src]);
                               var source = $("<source>");
-                              source.attr("type", $(this).attr("type"));
-                              source.attr("src", audioRepository[src]);
-                              $(this).replaceWith(source);
-                              //this.src = audioRepository[this.src];
+                              source.attr({type: $(this).attr("type"), src: audioRepository[src]});
+                              audio.append(source);
+                              replaced = true;
                             }
+                            else audio.append($(this).clone());
                           });
+                          if (replaced)
+                            $(t).replaceWith(audio);
                         });
       }, 7);
     }) ();
