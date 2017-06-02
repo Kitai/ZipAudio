@@ -141,7 +141,7 @@ define_ibex_controller({
           t.timer = setTimeout(function () {
                 // We won't try to load anymore
                 clearInterval(t.checkLoaded);
-                $("#content").html(this.errorMessage);
+                $("#content").html(t.errorMessage);
             }, t.timeout);
     }
   },
