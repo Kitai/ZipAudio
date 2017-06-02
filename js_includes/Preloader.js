@@ -56,7 +56,7 @@ $(document).ready(function() {
                           var sources = [];
                           $(t).find("source").each(function(){
                             var src = $(this).attr("src");
-                            if (typeof audioRepository[src] != "undefined")
+                            if (typeof audioRepository[src] != "undefined") {
                               console.log("Replacing "+src+" with "+audioRepository[src]);
                               var source = $("<source>");
                               source.attr({type: $(this).attr("type"), src: audioRepository[src]});
