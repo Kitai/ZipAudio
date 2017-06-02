@@ -45,9 +45,10 @@ $(document).ready(function() {
                         $("audio").each(function() {
                           var replaced = false;
                           var t = this;
-                          $(t).find("source").each(function(){                          
-                            if (typeof audioRepository[this.src] != "undefined"){
-                              console.log("Replacing "+this.src+" with "+audioRepository[this.src]);
+                          $(t).find("source").each(function(){
+                            var src = $(this).attr("src");
+                            if (typeof audioRepository[src] != "undefined"){
+                              console.log("Replacing "+src+" with "+audioRepository[src]);
                               //this.src = audioRepository[this.src];
                               replaced = true;
                             }
