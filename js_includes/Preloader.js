@@ -32,7 +32,7 @@ $(document).ready(function() {
         }
         //On charge le flux de donnée dans l'objet zip
         zip.loadAsync(data).then(function() {
-            var totalLength = Object.getOwnPropertyNames(zip.files);
+            var totalLength = Object.keys(zip.files).length;
             var currentLength = 0;
             //Pour chaque fichier du zip on crée une source audio
             zip.forEach(function(path, file){
