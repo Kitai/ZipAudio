@@ -1,6 +1,8 @@
 var shuffleSequence = seq("intro", sepWith("sep", seq("practice", rshuffle("s1", "s2"))), sepWith("sep", rshuffle("q1", "q2")));
 var practiceItemTypes = ["practice"];
 
+var zipFile = "http://files.lab.florianschwarz.net/ibexfiles/PsEntEx1ReGBAl/Audio/AudioFiles.zip";
+
 var defaults = [
     "Separator", {
         transfer: 1000,
@@ -55,10 +57,10 @@ var items = [
     // NOTE: You could also use the 'Message' controller for the experiment intro (this provides a simple
     // consent checkbox).
 
-    ["intro", "Message", {
-        html: { include: "audiorendering.html" },
-        transfer: "keypress"
-    } ],
+    // ["intro", "Message", {
+    //     html: { include: "audiorendering.html" },
+    //     transfer: "keypress"
+    // } ],
 
 
     ["intro", "Form", {
