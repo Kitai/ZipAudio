@@ -67,7 +67,7 @@ var items = [
         transfer: "click"
     }], 
 
-    ["intro", "Preloader", {
+    ["intro", "PreloaderCheck", {
     }], 
     
     ["intro", "Form", {

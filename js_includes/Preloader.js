@@ -1,6 +1,6 @@
-$(document).ready(function() {
+var __readyToPlay__ = false;
 
-  var __readyToPlay__ = false;
+$(document).ready(function() {
 
     function getAttributes ( $node ) {
       var attrs = {};
