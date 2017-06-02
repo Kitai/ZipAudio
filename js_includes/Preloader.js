@@ -12,7 +12,7 @@ $(document).ready(function() {
     //On crée une instance de zip
     var zip = new JSZip();
 
-  
+
     //On utilise le JSZipUtils pour récupérer le fichier zip en ajax
     JSZipUtils.getBinaryContent(zipFile, function(error, data) {
         if(error) {
@@ -31,6 +31,7 @@ $(document).ready(function() {
                 });
             });
         });
+        console.log(audioRepository);
     });
 
 
