@@ -36,6 +36,8 @@ $(document).ready(function() {
             //Pour chaque fichier du zip on crée une source audio
             zip.forEach(function(path, file){
                 file.async('arraybuffer').then(function(content){
+                    currentLength++;
+                    if (currentLength >= totalLength) __resourcesUnzipped__ = true;
                     var blob;
                     if (path.match(/\.wav$/)) 
                       blob = new Blob([content], {'type': 'audio/wav'});
@@ -49,10 +51,10 @@ $(document).ready(function() {
                       blob = new Blob([content], {'type': 'image/jpeg'});
                     else if (path.match(/\.gif$/))
                       blob = new Blob([content], {'type': 'image/gif'});
+                    else return;
                     var src = URL.createObjectURL(blob);
                     resourcesRepository[path] = src;
-                    currentLength++;
-                    if (currentLength >= totalLength) __resourcesUnzipped__ = true;
+                    
                 });
             });
         });
