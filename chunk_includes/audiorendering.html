@@ -1,0 +1,86 @@
+<html>
+ <script type="text/javascript" src="jszip.js"></script> 
+ <script type="text/javascript" src="jszip-utils.js"></script> 
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8"><script>
+    
+// var AudioContext = window.AudioContext || window.webkitAudioContext;
+// var ctx = new AudioContext();
+// var source = ctx.createBufferSource();
+
+// var ajax = new XMLHttpRequest();
+
+// ajax.onreadystatechange = function() {
+//     if(ajax.readyState === 4) {
+//         if(ajax.status >= 200 && ajax.status < 300)  {
+//             ctx.decodeAudioData(ajax.response, function(audiobuff) {
+//                 source.connect(ctx.destination);
+//                 source.buffer = audiobuff;
+//                 source.start(0);
+//             });
+//         }else {
+//             console.error(ajax.response);
+//         }
+//     }
+// };
+// ajax.open('GET', 'http://files.lab.florianschwarz.net/ibexfiles/PsEntEx1ReGBAl/Audio/kid_Again_bakery_Lynnwood.wav', true);
+// ajax.responseType = 'arraybuffer';
+
+// ajax.send();
+
+
+    //compatibilité pour safari et autre
+    var AudioContext = window.AudioContext || window.webkitAudioContext;
+    //On crée un array qui contiendra les différents audios
+    var arrayAudio = [];
+    //On crée une instance de zip
+    var zip = new JSZip();
+
+
+    //On utilise le JSZipUtils pour récupérer le fichier zip en ajax
+    JSZipUtils.getBinaryContent('http://files.lab.florianschwarz.net/ibexfiles/PsEntEx1ReGBAl/Audio/AudioFiles.zip', function(error, data) {
+        if(error) {
+            throw error;
+        }
+        //On charge le flux de donnée dans l'objet zip
+        zip.loadAsync(data).then(function() {
+            //Pour chaque fichier du zip on crée une source audio
+            zip.forEach(function(path, file){
+                
+                //var ctx = new AudioContext();
+                //var source = ctx.createBufferSource();
+                /*file.async('arraybuffer').then(function(arrayBuff){
+                    ctx.decodeAudioData(arrayBuff, function(audiobuff) {
+                        source.connect(ctx.destination);
+                        source.buffer = audiobuff;
+                        arrayAudio.push(source);
+                        console.log(path);
+                    });
+                });
+                */
+                console.log(file);
+                console.log(path);
+                file.async('arraybuffer').then(function(content){
+                    var blob = new Blob([content], {'type': 'audio/wav'});
+                    var src = URL.createObjectURL(blob);
+                    var sound      = document.createElement('audio');
+                    sound.id       = path;
+                    sound.controls = 'controls';
+                    sound.src      = src;
+                    sound.type     = 'audio/wav';
+                    document.getElementById('audio').appendChild(sound);
+                });
+            });
+        });
+    })
+
+</script>
+
+</head>
+
+<body>
+    <div id="audio"></div>
+</audio>
+</body>
+
+</html>
