@@ -49,14 +49,13 @@ $(document).ready(function() {
                             var src = $(this).attr("src");
                             if (typeof audioRepository[src] != "undefined"){
                               console.log("Replacing "+src+" with "+audioRepository[src]);
+                              var source = $("<source>");
+                              source.attr("type", $(this).attr("type"));
+                              source.attr("src", audioRepository[src]);
+                              $(this).replaceWith(source);
                               //this.src = audioRepository[this.src];
-                              replaced = true;
                             }
                           });
-                          if (replaced) {
-                            //$(this).replaceWith(audio);
-                            clearInterval(ivl);
-                          }
                         });
       }, 7);
     }) ();
