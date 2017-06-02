@@ -110,7 +110,7 @@ define_ibex_controller({
                                                                " Thank you.</p>");
 
         this.html = dget(this.options, "html", "<p>Please wait, resources are loading.</p>"+
-                                               "<p>This process might take up to "+humanTime(this.timeout)+"</p>".);
+                                               "<p>This process might take up to "+humanTime(this.timeout)+".</p>");
 
         this.element.addClass(this.cssPrefix + "preloader");
         this.element.append($("<div id='content'>").append(htmlCodeToDOM(this.html)));
