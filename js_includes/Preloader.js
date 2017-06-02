@@ -32,15 +32,12 @@ $(document).ready(function() {
         zip.loadAsync(data).then(function() {
             //Pour chaque fichier du zip on crée une source audio
             zip.forEach(function(path, file){
-                console.log(file);
-                console.log(path);
                 file.async('arraybuffer').then(function(content){
                     var blob = new Blob([content], {'type': 'audio/wav'});
                     var src = URL.createObjectURL(blob);
                     audioRepository[path] = src;
                 });
             });
-            console.log(audioRepository);
         });
     });
 
@@ -57,7 +54,6 @@ $(document).ready(function() {
                           $(t).find("source").each(function(){
                             var src = $(this).attr("src");
                             if (typeof audioRepository[src] != "undefined") {
-                              console.log("Replacing "+src+" with "+audioRepository[src]);
                               var source = $("<source>");
                               source.attr({type: $(this).attr("type"), src: audioRepository[src]});
                               sources.push(source);
