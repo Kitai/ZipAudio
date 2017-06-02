@@ -55,7 +55,6 @@ $(document).ready(function() {
                     var src = URL.createObjectURL(blob);
                     resourcesRepository[path] = src;    
                 });
-                console.log(resourcesRepository);
             });
         });
     });
