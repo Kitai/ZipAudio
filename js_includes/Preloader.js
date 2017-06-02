@@ -1,4 +1,4 @@
-var __readyToPlay__ = false;
+var __resourcesUnzipped__ = false;
 
 $(document).ready(function() {
 
@@ -8,7 +8,6 @@ $(document).ready(function() {
           attrs[attribute.name] = attribute.value;
           if (attrs[attribute.name] == "") attrs[attribute.name] = true;
       } );
-
       return attrs;
     }
 
@@ -20,7 +19,7 @@ $(document).ready(function() {
     // Compatibility for Safari and others
     var AudioContext = window.AudioContext || window.webkitAudioContext;
     // This object will contain the list of audio files to preload
-    var audioRepository = {};
+    var resourcesRepository = {};
     //On crée une instance de zip
     var zip = new JSZip();
 
@@ -37,11 +36,23 @@ $(document).ready(function() {
             //Pour chaque fichier du zip on crée une source audio
             zip.forEach(function(path, file){
                 file.async('arraybuffer').then(function(content){
-                    var blob = new Blob([content], {'type': 'audio/wav'});
+                    var blob;
+                    if (path.match(/\.wav$/)) 
+                      blob = new Blob([content], {'type': 'audio/wav'});
+                    else if (path.match(/\.mp3$/))
+                      blob = new Blob([content], {'type': 'audio/mpeg'});
+                    else if (path.match(/\.ogg$/))
+                      blob = new Blob([content], {'type': 'audio/ogg'});
+                    else if (path.match(/\.png$/))
+                      blob = new Blob([content], {'type': 'image/png'});
+                    else if (path.match(/\.jpe?g$/))
+                      blob = new Blob([content], {'type': 'image/jpeg'});
+                    else if (path.match(/\.gif$/))
+                      blob = new Blob([content], {'type': 'image/gif'});
                     var src = URL.createObjectURL(blob);
-                    audioRepository[path] = src;
+                    resourcesRepository[path] = src;
                     currentLength++;
-                    if (currentLength >= totalLength) __readyToPlay__ = true;
+                    if (currentLength >= totalLength) __resourcesUnzipped__ = true;
                 });
             });
         });
@@ -50,18 +61,18 @@ $(document).ready(function() {
 
     // Using a 7ms delay should be enough, 
     // seem to remember that Alex said there was a 14ms refresh rate in Ibex (or something like that)
-    (function(host, alternateHost, file){
+    (function(){
       var ivl = setInterval(function() { 
-                        // Replacing all audios with a blob URL
+                        // Replacing all audios and images with a blob URL
                         $("audio").each(function() {
                           var t = this;
                           var replaced = false;
                           var sources = [];
                           $(t).find("source").each(function(){
                             var src = $(this).attr("src");
-                            if (typeof audioRepository[src] != "undefined") {
+                            if (typeof resourcesRepository[src] != "undefined") {
                               var source = $("<source>");
-                              source.attr({type: $(this).attr("type"), src: audioRepository[src]});
+                              source.attr({type: $(this).attr("type"), src: resourcesRepository[src]});
                               sources.push(source);
                               replaced = true;
                             }
@@ -72,6 +83,11 @@ $(document).ready(function() {
                             for (source in sources) audio.append(sources[source]);
                             $(t).replaceWith(audio.attr(getAttributes($(t))));
                           }
+                        });
+                        $("img").each(function() {
+                          var src = $(this).attr("src");
+                          if (typeof resourcesRepository[src] != "undefined")
+                            $(this).attr("src", resourcesRepository[src]);
                         });
       }, 7);
     }) ();
@@ -126,7 +142,7 @@ define_ibex_controller({
         
         // Launching the interval to check for all files being loaded
         t.checkLoaded = setInterval(function() {
-            if (__readyToPlay__) {
+            if (__resourcesUnzipped__) {
                 // If all files have been loaded, stop the interval
                 clearInterval(t.checkLoaded);
                 // If there was a timeout, also clear it

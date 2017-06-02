@@ -1,7 +1,7 @@
 var shuffleSequence = seq("intro", sepWith("sep", seq("practice", rshuffle("s1", "s2"))), sepWith("sep", rshuffle("q1", "q2")));
 var practiceItemTypes = ["practice"];
 
-var zipFile = "http://files.lab.florianschwarz.net/ibexfiles/PsEntEx1ReGBAl/Audio/AudioFiles.zip";
+var zipFile = "http://files.lab.florianschwarz.net/ibexfiles/resources.zip";
 
 var defaults = [
     "Separator", {
