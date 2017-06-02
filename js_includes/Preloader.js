@@ -1,5 +1,7 @@
 $(document).ready(function() {
 
+    console.log("Executed once");
+
     assert(typeof zipFile == "string", "zipFile variable is either undefined or ill-defined");
 
     assert(zipFile.match(/^https?:\/\/.+\.zip$/) != null, "Bad format for the URL provided as zipFile ("+zipFile+")");
@@ -47,12 +49,12 @@ $(document).ready(function() {
                           audio.find(sources).each(function(){
                             if (typeof audioRepository[this.src] != "undefined"){
                               console.log("Replacing "+this.src+" with "+audioRepository[this.src]);
-                              this.src = audioRepository[this.src];
+                              //this.src = audioRepository[this.src];
                               replaced = true;
                             }
                           });
                           if (replaced) {
-                            $(this).replaceWith(audio);
+                            //$(this).replaceWith(audio);
                             clearInterval(ivl);
                           }
                         });
