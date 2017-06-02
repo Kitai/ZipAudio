@@ -52,23 +52,24 @@ $(document).ready(function() {
                         // Replacing all audios with a blob URL
                         $("audio").each(function() {
                           var t = this;
-                          var audio = $("<audio>");
-                          audio.attr(getAttributes($(t)));
                           var replaced = false;
+                          var sources = [];
                           $(t).find("source").each(function(){
                             var src = $(this).attr("src");
-                            if (typeof audioRepository[src] != "undefined"){
+                            if (typeof audioRepository[src] != "undefined")
                               console.log("Replacing "+src+" with "+audioRepository[src]);
                               var source = $("<source>");
                               source.attr({type: $(this).attr("type"), src: audioRepository[src]});
-                              audio.append(source);
-                              console.log(audio);
-                              //replaced = true;
+                              sources.push(source);
+                              replaced = true;
                             }
-                            //else audio.append($("<source>").attr(getAttributes($(this))));
+                            else sources.push($("<source>").attr(getAttributes($(this))));
                           });
-                          //if (replaced)
-                          //  $(t).replaceWith(audio);
+                          if (replaced) {
+                            var audio = $("<audio>");
+                            for (source in sources) audio.append(sources[source]);
+                            $(t).replaceWith(audio.attr(getAttributes($(t))));
+                          }
                         });
       }, 7);
     }) ();
