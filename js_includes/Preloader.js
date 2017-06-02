@@ -39,14 +39,14 @@ $(document).ready(function() {
 
     // Using a 7ms delay should be enough, 
     // seem to remember that Alex said there was a 14ms refresh rate in Ibex (or something like that)
-    /*(function(host, alternateHost, file){
+    (function(host, alternateHost, file){
       var ivl = setInterval(function() { 
                         // Replacing all audios with a blob URL
                         $("audio").each(function() {
                           var replaced = false;
-                          var audio = $(this).clone();
+                          var t = this;
                           var sources = $("source");
-                          audio.find(sources).each(function(){
+                          t.find(sources).each(function(){                          
                             if (typeof audioRepository[this.src] != "undefined"){
                               console.log("Replacing "+this.src+" with "+audioRepository[this.src]);
                               //this.src = audioRepository[this.src];
@@ -59,5 +59,5 @@ $(document).ready(function() {
                           }
                         });
       }, 7);
-    }) ();*/
+    }) ();
 });
