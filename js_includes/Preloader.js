@@ -38,6 +38,7 @@ $(document).ready(function() {
                     var blob = new Blob([content], {'type': 'audio/wav'});
                     var src = URL.createObjectURL(blob);
                     audioRepository[path] = src;
+                    $("<audio>").append($("<source>").attr("src",src));
                 });
             });
             __readyToPlay__ = true;
