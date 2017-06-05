@@ -78,6 +78,7 @@ $(document).ready(function() {
                             else sources.push($("<source>").attr(getAttributes($(this))));
                           });
                           if (replaced) {
+                            console.log(getAttributes($(t)));
                             var audio = $("<audio>");
                             // copying the events (if any)
                             if (typeof $._data($(t).get(0), 'events') == "object") {
