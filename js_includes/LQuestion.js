@@ -187,7 +187,7 @@ jqueryWidget: {
                             "We are sorry but your system does not support the audio."+
                         "</audio>");
 
-        audio[0].addEvent("play", function(){ 
+        addEvent("play", audio[0], function(){ 
             t.listensToStart = setInterval(function() { 
                 if (!this.paused) {
                     t.startsPlayback = new Date().getTime();
@@ -196,7 +196,7 @@ jqueryWidget: {
             }, 1);
         });
 
-        audio[0].addEvent("ended", function(){
+        addEvent("ended", audio[0], function(){
             t.endsPlayback = new Date().getTime();
         });
 
