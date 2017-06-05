@@ -12,9 +12,11 @@ $(document).ready(function() {
     // This object will contain the list of audio files to preload
     var resourcesRepository = {};
     var zip = new JSZip();
+    var errors = "";
 
     JSZipUtils.getBinaryContent(zipFile, function(error, data) {
         if(error) {
+            errors += error;
             throw error;
         }
         // Loading the zip object with the data stream
@@ -140,7 +142,8 @@ define_ibex_controller({
           t.timer = setTimeout(function () {
                 // We won't try to load anymore
                 clearInterval(t.checkLoaded);
-                $("#content").html(t.errorMessage);
+                $("#content").html("<div id='errorSorryMessage'>"+t.errorMessage+"</div>"+
+                                   "<div id='errorMessages'>"+errors+"</div>");
             }, t.timeout);
     }
   },
