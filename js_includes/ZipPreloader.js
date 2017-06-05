@@ -84,7 +84,7 @@ $(document).ready(function() {
 
 
 define_ibex_controller({
-  name: "PreloaderCheck",
+  name: "ZipPreloader",
 
   jqueryWidget: {    
     _init: function () {
