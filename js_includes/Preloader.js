@@ -81,7 +81,7 @@ $(document).ready(function() {
                             var audio = $("<audio>");
                             // copying the events (if any)
                             if (typeof $._data($(t).get(0), 'events') == "object") {
-                              $.each($._data($('#original').get(0), 'events'), function() {
+                              $.each($._data($(t).get(0), 'events'), function() {
                                 // iterate registered handler of original
                                 $.each(this, function() {
                                   audio.bind(this.type, this.handler);

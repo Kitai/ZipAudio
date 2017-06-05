@@ -4,9 +4,13 @@
   var playAudio = function(){ 
     var t = this, i = 0; 
     var ivl = setInterval(function(){ 
-      if (t.paused) i++; else { console.log("Playing after "+i+"ms."); clearInterval(ivl); }
+      if (t.paused) i++;
+      else { 
+        console.log("Playing after "+i+"ms.");
+        clearInterval(ivl);
+      }
     }, 1);
-  });
+  };
 </script>
 
 
