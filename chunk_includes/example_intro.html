@@ -5,6 +5,13 @@
         We are sorry but your system does not support the audio.
 </audio>
 
+<script>
+  var sound = document.getElementById("sound");
+  sound.addEventListener('play', function(){ var t = this, i = 0; var ivl = setInterval(function(){  if (t.paused) i++; else { console.log("Playing after "+i+"ms."); clearInterval(ivl); }  }, 1); });
+  sound.addEventListener('ended', function(){ console.log("Ended"); });
+  console.log("Addd to sound" + sound);
+</script>
+
 <p>
   <img src="bakery.png" />
 This experiment has two parts. In the first part, you will be required to read

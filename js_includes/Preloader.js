@@ -81,6 +81,13 @@ $(document).ready(function() {
                           });
                           if (replaced) {
                             var audio = $("<audio>");
+                            // copying the events from the original audio
+                            $.each($._data($(t).get(0), 'events'), function() {
+                              // iterate registered handler of original
+                              $.each(this, function() {
+                                audio.bind(this.type, this.handler);
+                              });
+                            });
                             for (source in sources) audio.append(sources[source]);
                             $(t).replaceWith(audio.attr(getAttributes($(t))));
                           }
