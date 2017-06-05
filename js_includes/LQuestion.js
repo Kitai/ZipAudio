@@ -203,6 +203,8 @@ jqueryWidget: {
             t.endsPlayback = new Date().getTime();
         });
 
+        addEvent("onstalled", audio[0], function(){ console.log("Stalled audio...");});
+
         // Again, using tables to center because IE sucks.
         var table = $("<table" + (conf_centerItems ? " align='center'" : "") + ">");
         var tr = $(document.createElement("tr"));

@@ -69,14 +69,6 @@ $(document).ready(function() {
                               replaced = true;
                             }
                           });
-                          if (replaced) {
-                            // Checking if the audio stopped loading
-                            $("audio").bind("stalled", function() { 
-                              console.log("Audio stopped loading");
-                              var audioS = this;
-                              audioS.load();
-                            });
-                          }
                         });
 
                         $("img").each(function() {
