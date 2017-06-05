@@ -223,7 +223,7 @@ jqueryWidget: {
                 t.setFlag(false);
                 t.finishedCallback([[questionField, t.question ? csv_url_encode(t.question) : "NULL"],
                                      [answerField, "NULL"], [correctField, "NULL"],
-                                     [timeField, answerTime - t.creationTime], ["event", timestamp]]]);
+                                     [timeField, answerTime - t.creationTime]]);
             }, this.timeout);
         }
 
