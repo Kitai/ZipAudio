@@ -22,7 +22,6 @@ $(document).ready(function() {
         // Loading the zip object with the data stream
         zip.loadAsync(data).then(function() {
           console.log("Download complete");
-          console.log(zip);
             var totalLength = Object.keys(zip.files).length;
             var currentLength = 0;
             // Going through each zip file
@@ -48,7 +47,6 @@ $(document).ready(function() {
                     var src = URL.createObjectURL(blob);
                     resourcesRepository[path] = src;    
                 });
-                console.log(resourcesRepository);
             });
         });
     });
