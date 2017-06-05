@@ -68,6 +68,7 @@ $(document).ready(function() {
                               $(this).replaceWith(source);
                               replaced = true;
                             }
+                            if (replaced) t.load();
                           });
                         });
 
