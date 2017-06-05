@@ -1,16 +1,19 @@
 <div style="width: 40em;">
 
-<audio id="sound" controls autoplay preload="auto" style="display: none;">
+<script>
+  var playAudio = function(){ 
+    var t = this, i = 0; 
+    var ivl = setInterval(function(){ 
+      if (t.paused) i++; else { console.log("Playing after "+i+"ms."); clearInterval(ivl); }
+    }, 1);
+  });
+</script>
+
+
+<audio id="sound" controls autoplay preload="auto" style="display: none;" onplay="playAudio">
     <source src="kid_Again_bakery_FallsCreek.wav" type="audio/wav" />
         We are sorry but your system does not support the audio.
 </audio>
-
-<script>
-  /*var sound = document.getElementById("sound");
-  sound.addEventListener('play', function(){ var t = this, i = 0; var ivl = setInterval(function(){  if (t.paused) i++; else { console.log("Playing after "+i+"ms."); clearInterval(ivl); }  }, 1); });
-  sound.addEventListener('ended', function(){ console.log("Ended"); });
-  console.log("Addd to sound" + sound);*/
-</script>
 
 <p>
   <img src="bakery.png" />

@@ -20,21 +20,19 @@ $(document).ready(function() {
     var AudioContext = window.AudioContext || window.webkitAudioContext;
     // This object will contain the list of audio files to preload
     var resourcesRepository = {};
-    //On crée une instance de zip
     var zip = new JSZip();
 
-
-    //On utilise le JSZipUtils pour récupérer le fichier zip en ajax
     JSZipUtils.getBinaryContent(zipFile, function(error, data) {
         if(error) {
             throw error;
         }
-        //On charge le flux de donnée dans l'objet zip
+        // Loading the zip object with the data stream
         zip.loadAsync(data).then(function() {
             var totalLength = Object.keys(zip.files).length;
             var currentLength = 0;
-            //Pour chaque fichier du zip on crée une source audio
+            // Going through each zip file
             zip.forEach(function(path, file){
+                // Unzipping the file, and counting how far we got
                 file.async('arraybuffer').then(function(content){
                     currentLength++;
                     if (currentLength >= totalLength) __resourcesUnzipped__ = true;
@@ -81,6 +79,15 @@ $(document).ready(function() {
                           });
                           if (replaced) {
                             var audio = $("<audio>");
+                            // copying the events (if any)
+                            if (typeof $._data($(t).get(0), 'events') == "object") {
+                              $.each($._data($('#original').get(0), 'events'), function() {
+                                // iterate registered handler of original
+                                $.each(this, function() {
+                                  audio.bind(this.type, this.handler);
+                                });
+                              });
+                            }
                             for (source in sources) audio.append(sources[source]);
                             $(t).replaceWith(audio.attr(getAttributes($(t))));
                           }
