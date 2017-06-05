@@ -66,6 +66,8 @@ jqueryWidget: {
         this.autoFirstChar = dget(this.options, "autoFirstChar", false);
         this.presentHorizontally = dget(this.options, "presentHorizontally", false);
 
+        this.audiotype = dget(this.options, "audioType", "wav");
+
         this.startsPlayback = 0;
         this.endsPlayback = 0;
 
@@ -186,7 +188,7 @@ jqueryWidget: {
             this.element.append(this.qp);
 
         var audio  = $("<audio controls autoplay preload='auto' style='display: none;'>"+
-                            "<source src='"+this.options.word+"' type='audio/wav' />"+
+                            "<source src='"+this.options.word+"' type='audio/"+this.audioType+"' />"+
                             "We are sorry but your system does not support the audio."+
                         "</audio>");
 
