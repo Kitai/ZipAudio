@@ -182,7 +182,7 @@ jqueryWidget: {
         if (! (this.qp === undefined))
             this.element.append(this.qp);
 
-        var audio  = $("<audio controls autoplay preload='auto' style='display: none;>"+
+        var audio  = $("<audio controls autoplay preload='auto' style='display: none;'>"+
                             "<source src='"+this.options.word+"' type='audio/wav' />"+
                             "We are sorry but your system does not support the audio."+
                         "</audio>");

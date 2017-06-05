@@ -80,7 +80,7 @@ var items = [
     }], 
     
     ["intro", "LQuestion", {
-      word:"kid_Again_bakery_FallsCreek.wav"
+      word: "kid_Again_bakery_FallsCreek.wav"
     }], 
     
 
