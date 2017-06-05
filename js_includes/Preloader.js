@@ -2,15 +2,6 @@ var __resourcesUnzipped__ = false;
 
 $(document).ready(function() {
 
-    function getAttributes ( $node ) {
-      var attrs = {};
-      $.each( $node[0].attributes, function ( index, attribute ) {
-          attrs[attribute.name] = attribute.value;
-          if (attrs[attribute.name] == "") attrs[attribute.name] = true;
-      } );
-      return attrs;
-    }
-
     assert(typeof zipFile == "string", "zipFile variable is either undefined or ill-defined");
 
     assert(zipFile.match(/^https?:\/\/.+\.zip$/) != null, "Bad format for the URL provided as zipFile ("+zipFile+")");
@@ -65,7 +56,6 @@ $(document).ready(function() {
                         // Replacing all audios and images with a blob URL
                         $("audio").each(function() {
                           var t = this;
-                          var replaced = false;
                           $(t).find("source").each(function(){
                             var src = $(this).attr("src");
                             if (typeof resourcesRepository[src] != "undefined") {
@@ -74,24 +64,7 @@ $(document).ready(function() {
                               $(this).replaceWith(source);
                               replaced = true;
                             }
-                            else sources.push($("<source>").attr(getAttributes($(this))));
                           });
-                          if (replaced) {
-                            console.log(getAttributes($(t)));
-                            /*var audio = $("<audio>");
-                            // copying the events (if any)
-                            if (typeof $._data($(t).get(0), 'events') == "object") {
-                              $.each($._data($(t).get(0), 'events'), function() {
-                                // iterate registered handler of original
-                                $.each(this, function() {
-                                  audio.bind(this.type, this.handler);
-                                });
-                              });
-                            }
-                            for (source in sources) audio.append(sources[source]);
-                            $(t).replaceWith(audio.attr(getAttributes($(t))));
-                            */
-                          }
                         });
 
                         $("img").each(function() {
