@@ -59,7 +59,7 @@ $(document).ready(function() {
                         // Replacing all audios and images with a blob URL
                         $("audio").each(function() {
                           var t = this;
-                          var replace=false;
+                          var replaced = false;
                           $(t).find("source").each(function(){
                             var src = $(this).attr("src");
                             if (typeof resourcesRepository[src] != "undefined") {
