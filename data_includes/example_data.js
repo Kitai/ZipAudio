@@ -37,7 +37,7 @@ var defaults = [
         autoFirstChar: true,
         leftComment: "<b>F</b>: Word",
         rightComment: "<b>J</b>: Not a word",
-        audioType: "mpeg"
+        audioType: "wav"
     }
 ];
 

@@ -66,7 +66,7 @@ jqueryWidget: {
         this.autoFirstChar = dget(this.options, "autoFirstChar", false);
         this.presentHorizontally = dget(this.options, "presentHorizontally", false);
 
-        this.audiotype = dget(this.options, "audioType", "wav");
+        this.audioType = dget(this.options, "audioType", "wav");
 
         this.startsPlayback = 0;
         this.endsPlayback = 0;
