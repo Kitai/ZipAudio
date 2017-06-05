@@ -73,13 +73,14 @@ $(document).ready(function() {
                               var source = $("<source>");
                               source.attr({type: $(this).attr("type"), src: resourcesRepository[src]});
                               sources.push(source);
+                              $(this).replaceWith(source);
                               replaced = true;
                             }
                             else sources.push($("<source>").attr(getAttributes($(this))));
                           });
                           if (replaced) {
                             console.log(getAttributes($(t)));
-                            var audio = $("<audio>");
+                            /*var audio = $("<audio>");
                             // copying the events (if any)
                             if (typeof $._data($(t).get(0), 'events') == "object") {
                               $.each($._data($(t).get(0), 'events'), function() {
@@ -91,6 +92,7 @@ $(document).ready(function() {
                             }
                             for (source in sources) audio.append(sources[source]);
                             $(t).replaceWith(audio.attr(getAttributes($(t))));
+                            */
                           }
                         });
 
