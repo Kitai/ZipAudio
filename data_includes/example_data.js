@@ -37,7 +37,7 @@ var defaults = [
         autoFirstChar: true,
         leftComment: "<b>F</b>: Word",
         rightComment: "<b>J</b>: Not a word",
-        audioType: "wav"
+        audioType: "mpeg"
     }
 ];
 
@@ -80,22 +80,22 @@ var items = [
     ["intro", "PreloaderCheck", {
     }], 
     
-    ["intro","LQuestion", {word: "plowl.wav",right: 1}],
-    ["intro","LQuestion", {word: "fout",right: 1}],
-    ["intro","LQuestion", {word: "slox",right: 1}],
-    ["intro","LQuestion", {word: "lub",right: 1}],
-    ["intro","LQuestion", {word: "pobd",right: 1}],
-    ["intro","LQuestion", {word: "pakth",right: 1}],
-    ["intro","LQuestion", {word: "tertz",right: 1}],
-    ["intro","LQuestion", {word: "foon",right: 1}],
-    ["intro","LQuestion", {word: "smile",right: 0}],
-    ["intro","LQuestion", {word: "golf",right: 0}],
-    ["intro","LQuestion", {word: "worth",right: 0}],
-    ["intro","LQuestion", {word: "duck",right: 0}],
-    ["intro","LQuestion", {word: "beat",right: 0}],
-    ["intro","LQuestion", {word: "nose",right: 0}],
-    ["intro","LQuestion", {word: "loaf",right: 0}],
-    ["intro","LQuestion", {word: "wine",right: 0}],
+    ["intro","LQuestion", {word: "plowl.mp3",right: 1}],
+    ["intro","LQuestion", {word: "fout.mp3",right: 1}],
+    ["intro","LQuestion", {word: "slox.mp3",right: 1}],
+    ["intro","LQuestion", {word: "lub.mp3",right: 1}],
+    ["intro","LQuestion", {word: "pobd.mp3",right: 1}],
+    ["intro","LQuestion", {word: "pakth.mp3",right: 1}],
+    ["intro","LQuestion", {word: "tertz.mp3",right: 1}],
+    ["intro","LQuestion", {word: "foon.mp3",right: 1}],
+    ["intro","LQuestion", {word: "smile.mp3",right: 0}],
+    ["intro","LQuestion", {word: "golf.mp3",right: 0}],
+    ["intro","LQuestion", {word: "worth.mp3",right: 0}],
+    ["intro","LQuestion", {word: "duck.mp3",right: 0}],
+    ["intro","LQuestion", {word: "beat.mp3",right: 0}],
+    ["intro","LQuestion", {word: "nose.mp3",right: 0}],
+    ["intro","LQuestion", {word: "loaf.mp3",right: 0}],
+    ["intro","LQuestion", {word: "wine.mp3",right: 0}],
 
     /*["intro", "Form", {
         html: { include: "example_intro.html" },
