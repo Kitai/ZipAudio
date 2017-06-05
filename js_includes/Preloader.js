@@ -66,13 +66,11 @@ $(document).ready(function() {
                         $("audio").each(function() {
                           var t = this;
                           var replaced = false;
-                          var sources = [];
                           $(t).find("source").each(function(){
                             var src = $(this).attr("src");
                             if (typeof resourcesRepository[src] != "undefined") {
                               var source = $("<source>");
                               source.attr({type: $(this).attr("type"), src: resourcesRepository[src]});
-                              sources.push(source);
                               $(this).replaceWith(source);
                               replaced = true;
                             }
