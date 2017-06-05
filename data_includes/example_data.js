@@ -1,4 +1,4 @@
-var shuffleSequence = seq("intro", sepWith("sep", seq("practice", rshuffle("s1", "s2"))), sepWith("sep", rshuffle("q1", "q2")));
+var shuffleSequence = seq("intro");
 var practiceItemTypes = ["practice"];
 
 var zipFile = "http://files.lab.florianschwarz.net/ibexfiles/resources.zip";
@@ -84,12 +84,12 @@ var items = [
     }], 
     
 
-    ["intro", "Form", {
+    /*["intro", "Form", {
         html: { include: "example_intro.html" },
         validators: {
             age: function (s) { if (s.match(/^\d+$/)) return true; else return "Bad value for \u2018age\u2019"; }
         }
-    } ],
+    } ],*/
 
     //
     // Three practice items for self-paced reading (one with a comprehension question).

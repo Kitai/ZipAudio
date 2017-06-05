@@ -35,7 +35,7 @@ jqueryWidget: {
         var correctField = "Whether or not answer was correct (NULL if N/A)";
         var timeField = "Time taken to answer.";
 
-        this.question = dget(this.options, "q");
+        this.question = dget(this.options, "word");
         this.answers = this.options.as;
 
         this.hasCorrect = dget(this.options, "hasCorrect", false);
@@ -151,24 +151,27 @@ jqueryWidget: {
                 t.finishedCallback([[[questionField, t.question ? csv_url_encode(t.question) : "NULL"],
                                      [answerField, csv_url_encode(ans)],
                                      [correctField, correct],
-                                     ["creationTime", t.creationTime]],
+                                     ["Event", "creationTime"],
+                                     ["timestamp", t.creationTime]],
 
                                      [[questionField, t.question ? csv_url_encode(t.question) : "NULL"],
                                      [answerField, csv_url_encode(ans)],
                                      [correctField, correct],
-                                     ["startsPlayback", t.startsPlayback]],
+                                     ["Event", "startsPlayback"],
+                                     ["timestamp", t.startsPlayback]],
 
                                      [[questionField, t.question ? csv_url_encode(t.question) : "NULL"],
                                      [answerField, csv_url_encode(ans)],
                                      [correctField, correct],
-                                     ["endsPlayback", t.endsPlayback]],
+                                     ["Event", "endsPlayback"],
+                                     ["timestamp", t.endsPlayback]],
 
 
                                      [[questionField, t.question ? csv_url_encode(t.question) : "NULL"],
                                      [answerField, csv_url_encode(ans)],
                                      [correctField, correct],
-                                     ["answerTime", answerTime]]
-
+                                     ["Event", "answerTime"],
+                                     ["timestamp", answerTime]]
                                      ]);
             };
         //    this.xl.append(li.append(a.append(ans)));
@@ -249,24 +252,27 @@ jqueryWidget: {
                     t.finishedCallback([[[questionField, t.question ? csv_url_encode(t.question) : "NULL"],
                                      [answerField, csv_url_encode(ans)],
                                      [correctField, correct],
-                                     ["creationTime", t.creationTime]],
+                                     ["Event", "creationTime"],
+                                     ["timestamp", t.creationTime]],
 
                                      [[questionField, t.question ? csv_url_encode(t.question) : "NULL"],
                                      [answerField, csv_url_encode(ans)],
                                      [correctField, correct],
-                                     ["startsPlayback", t.startsPlayback]],
+                                     ["Event", "startsPlayback"],
+                                     ["timestamp", t.startsPlayback]],
 
                                      [[questionField, t.question ? csv_url_encode(t.question) : "NULL"],
                                      [answerField, csv_url_encode(ans)],
                                      [correctField, correct],
-                                     ["endsPlayback", t.endsPlayback]],
+                                     ["Event", "endsPlayback"],
+                                     ["timestamp", t.endsPlayback]],
 
 
                                      [[questionField, t.question ? csv_url_encode(t.question) : "NULL"],
                                      [answerField, csv_url_encode(ans)],
                                      [correctField, correct],
-                                     ["answerTime", answerTime]]
-
+                                     ["Event", "answerTime"],
+                                     ["timestamp", answerTime]]
                                      ]);
 
                     return false;
@@ -312,24 +318,27 @@ jqueryWidget: {
                     t.finishedCallback([[[questionField, t.question ? csv_url_encode(t.question) : "NULL"],
                                      [answerField, csv_url_encode(ans)],
                                      [correctField, correct],
-                                     ["creationTime", t.creationTime]],
+                                     ["Event", "creationTime"],
+                                     ["timestamp", t.creationTime]],
 
                                      [[questionField, t.question ? csv_url_encode(t.question) : "NULL"],
                                      [answerField, csv_url_encode(ans)],
                                      [correctField, correct],
-                                     ["startsPlayback", t.startsPlayback]],
+                                     ["Event", "startsPlayback"],
+                                     ["timestamp", t.startsPlayback]],
 
                                      [[questionField, t.question ? csv_url_encode(t.question) : "NULL"],
                                      [answerField, csv_url_encode(ans)],
                                      [correctField, correct],
-                                     ["endsPlayback", t.endsPlayback]],
+                                     ["Event", "endsPlayback"],
+                                     ["timestamp", t.endsPlayback]],
 
 
                                      [[questionField, t.question ? csv_url_encode(t.question) : "NULL"],
                                      [answerField, csv_url_encode(ans)],
                                      [correctField, correct],
-                                     ["answerTime", answerTime]]
-
+                                     ["Event", "answerTime"],
+                                     ["timestamp", answerTime]]
                                      ]);
                     
                     return false;
