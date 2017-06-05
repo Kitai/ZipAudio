@@ -28,6 +28,15 @@ var defaults = [
         hideProgressBar: true,
         continueOnReturn: true,
         saveReactionTime: true
+    },
+    "LQuestion", {
+        as: ["F","J"],
+        randomOrder: false,
+        showNumbers: false,
+        presentHorizontally: true,
+        autoFirstChar: true,
+        leftComment: "<b>F</b>: Word",
+        rightComment: "<b>J</b>: Not a word"
     }
 ];
 
@@ -70,6 +79,11 @@ var items = [
     ["intro", "PreloaderCheck", {
     }], 
     
+    ["intro", "LQuestion", {
+      word:"kid_Again_bakery_FallsCreek.wav"
+    }], 
+    
+
     ["intro", "Form", {
         html: { include: "example_intro.html" },
         validators: {
