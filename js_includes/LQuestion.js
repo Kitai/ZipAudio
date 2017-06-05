@@ -7,7 +7,7 @@
 (function () {
 
 // Defining a custom function cause IE sucks
-function addEvent(evnt, elem, func) {
+var addEvent = function (evnt, elem, func) {
    if (elem.addEventListener)  // W3C DOM
       elem.addEventListener(evnt,func,false);
    else if (elem.attachEvent) { // IE DOM
