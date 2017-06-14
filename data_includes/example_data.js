@@ -1,7 +1,7 @@
 var shuffleSequence = seq("intro");
 var practiceItemTypes = ["practice"];
 
-var zipFile = "http://files.lab.florianschwarz.net/ibexfiles/resources.zip";
+var zipFiles = "http://files.lab.florianschwarz.net/ibexfiles/resources.zip";
 
 var defaults = [
     "LQuestion", {

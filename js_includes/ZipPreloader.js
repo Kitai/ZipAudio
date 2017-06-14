@@ -1,27 +1,30 @@
+// List of changes
+//  06-14-2017
+//    - Added support of multiple zip files
+//    - Added better support for images
+//    - Added MutationObserver for browsers that support it
+
 var __resourcesUnzipped__ = false;
 
 $(document).ready(function() {
 
-    assert(typeof zipFile == "string", "zipFile variable is either undefined or ill-defined");
-
-    assert(zipFile.match(/^https?:\/\/.+\.zip$/) != null, "Bad format for the URL provided as zipFile ("+zipFile+")");
-
-
-    // Compatibility for Safari and others
-    var AudioContext = window.AudioContext || window.webkitAudioContext;
     // This object will contain the list of audio files to preload
     var resourcesRepository = {};
-    var zip = new JSZip();
-    var errors = "";
+    var numberUnzippedFiles = 0;
+    var isZipFilesAnArray = Array.isArray(zipFiles);
 
-    JSZipUtils.getBinaryContent(zipFile, function(error, data) {
+    var getZipFile = function(zipfilename){
+      var zip = new JSZip();
+      var errors = "";
+    
+      JSZipUtils.getBinaryContent(zipfilename, function(error, data) {
         if(error) {
             errors += error;
             throw error;
         }
         // Loading the zip object with the data stream
         zip.loadAsync(data).then(function() {
-          console.log("Download complete");
+          console.log("Download of "+zipfilename+" complete");
             var totalLength = Object.keys(zip.files).length;
             var currentLength = 0;
             // Going through each zip file
@@ -29,7 +32,11 @@ $(document).ready(function() {
                 // Unzipping the file, and counting how far we got
                 file.async('arraybuffer').then(function(content){
                     currentLength++;
-                    if (currentLength >= totalLength) __resourcesUnzipped__ = true;
+                    if (currentLength >= totalLength) {
+                      numberUnzippedFiles++;
+                      if (!isZipFilesAnArray || numberUnzippedFiles == zipFiles.length)
+                        __resourcesUnzipped__ = true;
+                    }
                     var blob;
                     if (path.match(/\.wav$/)) 
                       blob = new Blob([content], {'type': 'audio/wav'});
@@ -49,14 +56,32 @@ $(document).ready(function() {
                 });
             });
         });
-    });
+      });
+    };
+
+    
+    if (isZipFilesAnArray) 
+      $.each(zipFiles, function(i, zipFile) {
+        assert(typeof zipFile == "string", "zipFile variable is either undefined or ill-defined");
+        assert(zipFile.match(/^https?:\/\/.+\.zip$/) != null, "Bad format for the URL provided as zipFile ("+zipFile+")");
+        getZipFile(zipFile);
+      })
+    else {
+      assert(typeof zipFiles == "string", "zipFile variable is either undefined or ill-defined"); 
+      assert(zipFiles.match(/^https?:\/\/.+\.zip$/) != null, "Bad format for the URL provided as zipFile ("+zipFiles+")");
+      getZipFile(zipFiles);
+    }
+    
+});
 
 
     // Using a 7ms delay should be enough, 
     // seem to remember that Alex said there was a 14ms refresh rate in Ibex (or something like that)
     (function(){
 
+        // Returns the URL of the filename if it is in resourcesRepository, null otherwise
         var inRep = function(filename) {
+          // Using window.location to retrieve the local path added in "url()" by jQuery.css before bare filenames
           var loc = window.location.toString(), localHost = loc.toString().substring(0, loc.lastIndexOf('/'))+"/";
           if (typeof resourcesRepository[filename] != "undefined")
             return resourcesRepository[filename];
@@ -84,7 +109,7 @@ $(document).ready(function() {
               if (inRep(src))
                 element.attr("src", inRep(src));
           }
-
+          // If CSS property, replace it
           $.each(hasImgProperties, function (i, property) {
               var propertyValue = element.css(property);
               var match;
@@ -94,13 +119,12 @@ $(document).ready(function() {
               }
               // Get all url() of this element.
               while (match = matchUrl.exec(propertyValue)) {
-                console.log("One match: "+match[2]);
                 // If the filename matches
                 if (inRep(match[2]))
                   element.css(property, "url('"+inRep(match[2])+"')");
               }
           });
-
+          // If attribute, replace it
           $.each(hasImageAttributes, function (i, attribute) {
               var attributeValue = element.attr(attribute);
               var attributeValues;
@@ -132,12 +156,13 @@ $(document).ready(function() {
               if (replaced) t.load();
             });
           });
-
+          // Check images
           $("#bod").find("*").each(function() {
             checkImages($(this));
           });
         }
 
+        // MutationObserver avoids overloading the browser: only triggered when update in DOM
         if (typeof MutationObserver != "undefined") {
           // select the target node
           var target = document.querySelector('#bod');
@@ -148,6 +173,7 @@ $(document).ready(function() {
           // pass in the target node, as well as the observer options
           observer.observe(target, config);
         }
+        // If no MutationObserver, check every 7 milliseconds (might result in overloading)
         else
           var ivl = setInterval(updatePotentialFilenames, 7);
     }) ();
