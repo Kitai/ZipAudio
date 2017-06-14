@@ -133,7 +133,7 @@ $(document).ready(function() {
             });
           });
 
-          $("#bod").find("*").addBack().each(function() {
+          $("#bod").find("*").each(function() {
             checkImages($(this));
           });
         }
