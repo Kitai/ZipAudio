@@ -11,7 +11,6 @@ $(document).ready(function() {
     // This object will contain the list of audio files to preload
     var resourcesRepository = {};
     var numberUnzippedFiles = 0;
-    var isZipFilesAnArray = Array.isArray(zipFiles);
 
     var getZipFile = function(zipfilename){
       var zip = new JSZip();
@@ -34,7 +33,7 @@ $(document).ready(function() {
                     currentLength++;
                     if (currentLength >= totalLength) {
                       numberUnzippedFiles++;
-                      if (!isZipFilesAnArray || numberUnzippedFiles == zipFiles.length)
+                      if (numberUnzippedFiles == zipFiles.length)
                         __resourcesUnzipped__ = true;
                     }
                     var blob;
@@ -59,17 +58,11 @@ $(document).ready(function() {
       });
     };
     
-    if (isZipFilesAnArray) 
-      $.each(zipFiles, function(i, zipFile) {
-        assert(typeof zipFile == "string", "zipFile variable is either undefined or ill-defined");
-        assert(zipFile.match(/^https?:\/\/.+\.zip$/) != null, "Bad format for the URL provided as zipFile ("+zipFile+")");
+    $.each(zipFiles, function(i, zipFile) {
+        assert(typeof zipFile == "string", "zipFiles variable is either undefined or ill-defined");
+        assert(zipFile.match(/^https?:\/\/.+\.zip$/) != null, "Bad format for the URL provided as zipFiles ("+zipFile+")");
         getZipFile(zipFile);
-      })
-    else {
-      assert(typeof zipFiles == "string", "zipFile variable is either undefined or ill-defined"); 
-      assert(zipFiles.match(/^https?:\/\/.+\.zip$/) != null, "Bad format for the URL provided as zipFile ("+zipFiles+")");
-      getZipFile(zipFiles);
-    }
+    })
     
 });
 
