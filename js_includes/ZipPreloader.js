@@ -174,7 +174,7 @@ $(document).ready(function() {
 });
 
 define_ibex_controller({
-  name: "ZipPreloaderBis",
+  name: "ZipPreloader",
 
   jqueryWidget: {    
     _init: function () {
