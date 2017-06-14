@@ -55,101 +55,29 @@ $(document).ready(function() {
     // Using a 7ms delay should be enough, 
     // seem to remember that Alex said there was a 14ms refresh rate in Ibex (or something like that)
     (function(){
+      var ivl = setInterval(function() { 
+                        // Replacing all audios and images with a blob URL
+                        $("audio").each(function() {
+                          var t = this;
+                          var replaced = false;
+                          $(t).find("source").each(function(){
+                            var src = $(this).attr("src");
+                            if (typeof resourcesRepository[src] != "undefined") {
+                              var source = $("<source>");
+                              source.attr({type: $(this).attr("type"), src: resourcesRepository[src]});
+                              $(this).replaceWith(source);
+                              replaced = true;
+                            }
+                            if (replaced) t.load();
+                          });
+                        });
 
-        var inRep = function(filename) {
-          var loc = window.location.toString(), localHost = loc.toString().substring(0, loc.lastIndexOf('/'))+"/";
-          if (typeof resourcesRepository[filename] != "undefined")
-            return resourcesRepository[filename];
-          if (typeof resourcesRepository[filename.replace(localHost,"")] != "undefined")
-            return resourcesRepository[filename.replace(localHost,"")];
-          return null;
-        };
-
-        // CSS properties which may contain an image.
-        var hasImgProperties = ['backgroundImage','listStyleImage','borderImage','borderCornerImage','cursor'];
-        // Element attributes which may contain an image.
-        var hasImageAttributes = ['srcset'];
-        // To match `url()` references.
-        // Spec: http://www.w3.org/TR/CSS2/syndata.html#value-def-uri
-        var matchUrl = /url\(\s*(['"]?)(.*?)\1\s*\)/g;
-        // checkImages is to be called on a jQuery object
-        var checkImages = function(element) {
-
-          // If an `img` element, treat it. But keep iterating in
-          // case it has a background image too.
-          if (element.is('img[src][src!=""]') &&
-              !element.is('[srcset]')) {
-              var src = element.attr('src');
-              // Replace attr if it matches
-              if (inRep(src))
-                element.attr("src", inRep(src));
-          }
-
-          $.each(hasImgProperties, function (i, property) {
-              var propertyValue = element.css(property);
-              var match;
-              // If it doesn't contain this property, skip.
-              if (!propertyValue) {
-                  return true;
-              }
-              // Get all url() of this element.
-              while (match = matchUrl.exec(propertyValue)) {
-                console.log("One match: "+match[2]);
-                // If the filename matches
-                if (inRep(match[2]))
-                  element.css(property, "url('"+inRep(match[2])+"')");
-              }
-          });
-
-          $.each(hasImageAttributes, function (i, attribute) {
-              var attributeValue = element.attr(attribute);
-              var attributeValues;
-              // If it doesn't contain this property, skip.
-              if (!attributeValue) {
-                  return true;
-              }
-              var src = element.attr('src'), srcset = element.attr('srcset');
-              if (inRep(src))
-                element.attr("src", inRep(src));
-              if (inRep(srcset))
-                element.attr("srcset", inRep(srcset));
-          });
-        };
-
-        var updatePotentialFilenames = function () {
-          // Replacing all audios and images with a blob URL
-          $("audio").each(function() {
-            var t = this;
-            var replaced = false;
-            $(t).find("source").each(function(){
-              var src = $(this).attr("src");
-              if (inRep(src)) {
-                var source = $("<source>");
-                source.attr({type: $(this).attr("type"), src: inRep(src)});
-                $(this).replaceWith(source);
-                replaced = true;
-              }
-              if (replaced) t.load();
-            });
-          });
-
-          $("#bod").find("*").addBack().each(function() {
-            checkImages($(this));
-          });
-        }
-
-        if (typeof MutationObserver != "undefined") {
-          // select the target node
-          var target = document.querySelector('#bod');
-          // create an observer instance
-          var observer = new MutationObserver(updatePotentialFilenames);
-          // configuration of the observer:
-          var config = { attributes: true, childList: true, characterData: true, subtree: true };
-          // pass in the target node, as well as the observer options
-          observer.observe(target, config);
-        }
-        else
-          var ivl = setInterval(updatePotentialFilenames, 7);
+                        $("img").each(function() {
+                          var src = $(this).attr("src");
+                          if (typeof resourcesRepository[src] != "undefined")
+                            $(this).attr("src", resourcesRepository[src]);
+                        });
+      }, 7);
     }) ();
 });
 
