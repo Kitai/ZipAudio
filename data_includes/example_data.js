@@ -23,7 +23,7 @@ var items = [
         transfer: "click"
     }], 
 
-    ["intro", "ZipPreloader", {
+    ["intro", "ZipPreloaderBis", {
     }], 
     
     ["intro","LQuestion", {word: "plowl.mp3",right: 1}],
