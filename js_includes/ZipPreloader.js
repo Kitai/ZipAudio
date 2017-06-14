@@ -153,7 +153,7 @@ $(document).ready(function() {
           $("#bod").find("*").each(function() {
             checkImages($(this));
           });
-        }
+        };
 
         // MutationObserver avoids overloading the browser: only triggered when update in DOM
         if (typeof MutationObserver != "undefined") {
