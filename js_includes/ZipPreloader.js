@@ -60,6 +60,7 @@ $(document).ready(function() {
     
     assert(Array.isArray(zipFile), "zipFiles should be an array of URLs");
     $.each(zipFiles, function(i, zipFile) {
+        console.log("Investigating "+zipFile)
         assert(typeof zipFile == "string", "zipFiles variable is either undefined or ill-defined ("+typeof zipFiles+")");
         assert(zipFile.match(/^https?:\/\/.+\.zip$/) != null, "Bad format for the URL provided as zipFiles ("+zipFile+")");
         getZipFile(zipFile);
