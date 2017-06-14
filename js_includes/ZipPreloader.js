@@ -64,8 +64,6 @@ $(document).ready(function() {
         assert(zipFile.match(/^https?:\/\/.+\.zip$/) != null, "Bad format for the URL provided as zipFiles ("+zipFile+")");
         getZipFile(zipFile);
     });
-    
-});
 
 
     // Using a 7ms delay should be enough, 
@@ -173,7 +171,7 @@ $(document).ready(function() {
         
     }) ();
 
-
+});
 
 define_ibex_controller({
   name: "ZipPreloaderBis",
