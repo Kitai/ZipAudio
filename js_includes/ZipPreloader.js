@@ -58,7 +58,6 @@ $(document).ready(function() {
         });
       });
     };
-
     
     if (isZipFilesAnArray) 
       $.each(zipFiles, function(i, zipFile) {
@@ -77,7 +76,7 @@ $(document).ready(function() {
 
     // Using a 7ms delay should be enough, 
     // seem to remember that Alex said there was a 14ms refresh rate in Ibex (or something like that)
-    (function(){
+    (function() {
 
         // Returns the URL of the filename if it is in resourcesRepository, null otherwise
         var inRep = function(filename) {
@@ -174,10 +173,11 @@ $(document).ready(function() {
           observer.observe(target, config);
         }
         // If no MutationObserver, check every 7 milliseconds (might result in overloading)
-        else
+        else {
           var ivl = setInterval(updatePotentialFilenames, 7);
+        }
+        
     }) ();
-});
 
 
 
